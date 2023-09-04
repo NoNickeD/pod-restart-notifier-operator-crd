@@ -1,0 +1,27 @@
+# permissions for end users to view podnotifrestarts.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: podnotifrestart-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: test-pod-restart-notifier-crd
+    app.kubernetes.io/part-of: test-pod-restart-notifier-crd
+    app.kubernetes.io/managed-by: kustomize
+  name: podnotifrestart-viewer-role
+rules:
+- apiGroups:
+  - monitoring.vodafone.com
+  resources:
+  - podnotifrestarts
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - monitoring.vodafone.com
+  resources:
+  - podnotifrestarts/status
+  verbs:
+  - get

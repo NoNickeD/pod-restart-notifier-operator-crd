@@ -1,0 +1,27 @@
+namespace: default
+
+image:
+  repository: nonickednn/pod-restart-notifier-operator-crd
+  tag: 0.1.5
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "50m"
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
+
+serviceAccount:
+  name: pod-restart-notifier-operator-sa
+
+customResource:
+  minRestarts: 1
+  namespacesToMonitor: default
+discord:
+  webhookURL: null
+teams:
+  webhookURL: null
+slack:
+  webhookURL: null

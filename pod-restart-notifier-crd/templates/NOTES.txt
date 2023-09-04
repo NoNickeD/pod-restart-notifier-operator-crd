@@ -1,0 +1,25 @@
+Thank you for installing Pod Restart Notifier!
+
+Your release is named {{ .Release.Name }} and deployed into the {{ .Release.Namespace }} namespace.
+
+To ensure everything is working as expected:
+
+1. Check the custom resource (PodNotifRestart):
+
+  kubectl get podnotifrestarts.monitoring.vodafone.com -n {{ .Release.Namespace }}
+
+2. Monitor logs for the operator:
+
+  kubectl logs -l app=pod-restart-notifier-operator -n {{ .Release.Namespace }}
+
+3. To update configuration:
+
+  helm upgrade {{ .Release.Name }} ./pod-restart-notifier-crd --set customResource.minRestarts=NEW_VALUE
+
+Webhook URLs:
+
+- Discord: {{ .Values.discord.webhookURL }}
+- Teams: {{ .Values.teams.webhookURL }}
+- Slack: {{ .Values.slack.webhookURL }}
+
+Please refer to the documentation at https://github.com/NoNickeD/pod-restart-notifier-operator-crd for advanced configurations and usage.

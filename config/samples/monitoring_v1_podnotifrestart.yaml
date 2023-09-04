@@ -1,0 +1,12 @@
+apiVersion: monitoring.vodafone.com/v1
+kind: PodNotifRestart
+metadata:
+  labels:
+    app.kubernetes.io/name: podnotifrestart
+    app.kubernetes.io/instance: podnotifrestart-sample
+    app.kubernetes.io/part-of: test-pod-restart-notifier-crd
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: test-pod-restart-notifier-crd
+  name: podnotifrestart-sample
+spec:
+  # TODO(user): Add fields here

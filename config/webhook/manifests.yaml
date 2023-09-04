@@ -1,0 +1,52 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-monitoring-vodafone-com-v1-podnotifrestart
+  failurePolicy: Fail
+  name: mpodnotifrestart.kb.io
+  rules:
+  - apiGroups:
+    - monitoring.vodafone.com
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - podnotifrestarts
+  sideEffects: None
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /validate-monitoring-vodafone-com-v1-podnotifrestart
+  failurePolicy: Fail
+  name: vpodnotifrestart.kb.io
+  rules:
+  - apiGroups:
+    - monitoring.vodafone.com
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - podnotifrestarts
+  sideEffects: None

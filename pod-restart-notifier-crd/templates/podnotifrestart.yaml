@@ -1,0 +1,20 @@
+apiVersion: monitoring.vodafone.com/v1
+kind: PodNotifRestart
+metadata:
+  name: default-podnotifrestart
+  namespace: "{{ .Values.namespace }}"
+spec:
+  minRestarts: {{ .Values.customResource.minRestarts | int }}
+  namespacesToMonitor:
+    {{- if .Values.customResource.namespacesToMonitor }}
+    - {{ .Values.customResource.namespacesToMonitor }}
+    {{- end }}
+  {{- with .Values.discord.webhookURL }}
+  discordWebhookURL: "{{ . }}"
+  {{- end }}
+  {{- with .Values.teams.webhookURL }}
+  teamsWebhookURL: "{{ . }}"
+  {{- end }}
+  {{- with .Values.slack.webhookURL }}
+  slackWebhookURL: "{{ . }}"
+  {{- end }}
